@@ -10,7 +10,7 @@ root/             # the root git repository
   |_sub/          # a submodule
 ```
 
-### add a new submodule to a repo 
+### Add a new submodule to a repo 
 
 this will create a `.gitmodules` file in `root/` containing info on the submodule 
 
@@ -21,7 +21,7 @@ git add -A && git commit -m "first commit"          # a commit for good measure
 git add submodule git@github.com:youUserId/sub.git  # add the submodule
 ```
 
-### clone a repo with a sumodule
+### Clone a repo with a sumodule
 
 ```bash
 # clone the repo
@@ -38,7 +38,7 @@ explanation of the `git submodule init && git submodule update`:
 - `init` reads the .gitmodules file in the repository to configure the submodules and prepares to fetch the submodule contents
 - `update` fetches submodule contents from remote repo
 
-### change the submodule branch or checkout to a submodule commit
+### Change the submodule branch or checkout to a submodule commit
 
 the module `root` is in the branch `main`. you want to checkout the submodule to the branch `dev` without changing `root`'s branch.
 
