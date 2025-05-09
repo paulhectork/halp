@@ -75,11 +75,3 @@ you need to create in `data/` a `.gitignore` file with the contents below. `*` t
 !.gitignore
 ```
 
-as a one liner:
-
-```bash
-# in root/
-echo -e "*\n!.gitignore" > data/.gitignore  # as always, `>` deletes pre-existing contents from file.
-```
-
-
