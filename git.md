@@ -1,5 +1,7 @@
 # GIT
 
+---
+
 ## Submodules
 
 consider the structure below, with a repo named `root` containing a submodule named `sub`.
@@ -18,7 +20,7 @@ this will create a `.gitmodules` file in `root/` containing info on the submodul
 # in root/
 git init                                            # create the repo
 git add -A && git commit -m "first commit"          # a commit for good measure
-git add submodule git@github.com:youUserId/sub.git  # add the submodule
+git submodule add git@github.com:youUserId/sub.git  # add the submodule
 ```
 
 ### Clone a repo with a sumodule
@@ -51,6 +53,33 @@ git checkout dev  # to checkout to a specific commit, do `git checkout <commit h
 cd .. 
 git add sub/ && git commit "change sub branch"
 git push origin main
+```
+
+---
+
+## Gitignore
+
+### Keep a folder in the git repo but not its contents
+
+you have the following repo structure and want to keep `data` in the folder, but not its contents.
+
+```
+root/
+  |_data/
+```
+
+you need to create in `data/` a `.gitignore` file with the contents below. `*` tells Git to ignore all files, but `!.gitignore` tells Git to keep the `.gitignore` file.
+
+```
+*
+!.gitignore
+```
+
+as a one liner:
+
+```bash
+# in root/
+echo -e "*\n!.gitignore" > data/.gitignore  # as always, `>` deletes pre-existing contents from file.
 ```
 
 
