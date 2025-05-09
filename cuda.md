@@ -1,6 +1,6 @@
 # CUDA
 
-## locate cuda and add it to PATH
+## locate CUDA and add it to PATH
 
 ```bash
 echo $CUDA_HOME  # if already defined, go to next step
@@ -20,3 +20,20 @@ export CUDA_HOME=/usr/local/cuda
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 ```
+
+## CUDA version mismatches
+
+if several CUDA versions are installed on a machine, you may get this situation:
+
+```bash
+$ nvidia-smi
+Failed to initialize NVML: Driver/library version mismatch
+```
+
+the easiest fix is a reboot:
+
+```bash
+sudo reboot
+```
+
+else, [this answer](https://stackoverflow.com/a/45319156) provides a reboot-free solution.
