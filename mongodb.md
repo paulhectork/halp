@@ -29,13 +29,14 @@ mongosh
 ## Databases
 
 - the default databases in self-hosted localhost are `admin`, `config`, `local`
+- `use <dbName>` is the `mongosh` command to create a database
 - a database is NOT created UNTIL data is written in it
 
 ### Helper `mongosh` commands 
 
 ```js
 show dbs      // list all databases
-use <dbName>  // switch to database `<dbName>`
+use <dbName>  // switch to database `<dbName>`. creates it if it does not exist
 ```
 
 ---
@@ -53,15 +54,17 @@ use <dbName>  // switch to database `<dbName>`
 
 #### Create the user administrator (first user)
 
+[source](https://www.mongodb.com/docs/manual/tutorial/configure-scram-client-authentication/)
+
 you will need to restart mongodb after creating the user
 
-1. start `mongod` and connect to it without authentication
+1. **start `mongod` and connect to it** without authentication
 
 ```bash
-mongod
+sudo systemctl mongod  # or `mongod`. the default `mongod` service starts without authentication
 ```
 
-2. create the user (in `mongosh`)
+2. **create the user** (in `mongosh`)
 
 ```js
 use admin  // switch to the admin database. this means that the `authenticationDatabase` for the new user will be `admin`
@@ -77,27 +80,26 @@ db.createUser(
 )
 ```
 
-3. stop mongodb
+3. **stop `mongod`**
 
 ```bash
 sudo systemctl stop mongod
-
 ```
 
-4. edit the config file by adding:
+4. **edit the config file** (`/etc/mongod.conf`) by adding:
 
 ```
 security:
     authorization: enabled
 ```
 
-5. restart mongodb
+5. **restart mongodb**
 
 ```bash
 sudo systemctl start mongodb
 ```
 
-6. connect as a client using the user you want:
+6. **connect as a client** with the user you want:
 
 ```bash
 mongosh --port 27017 \
@@ -110,6 +112,48 @@ mongosh --port 27017 \
 
 ## Connection strings
 
+### URI anatomy 
 
+[source](https://www.mongodb.com/docs/manual/reference/connection-string/#find-your-self-hosted-deployment-s-connection-string)
 
+**connexion string anatomy**
+- [SRV format](https://www.mongodb.com/docs/manual/reference/connection-string/#std-label-connections-dns-seedlist)
+    ```
+    mongodb+srv://[username:password@]host[/[defaultauthdb][?options]]
+    ```
+- [standard format](https://www.mongodb.com/docs/manual/reference/connection-string/#find-your-self-hosted-deployment-s-connection-string)
+    ```
+    mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]
+    ```
+- NOTES:
+    - the syntax of both URIs is the same; adding `+srv` to the prefix will indicate that we are using an SRV connexion to `mongod`.
+    - if you are logged in `mongosh`, `db.getMongo()` will return the conexion string.
+
+**parameters**
+- `username@password`: pretty straightforward, right ?
+    - NOTE characters `$ : / ? # [ ] @` in the usename and password MUST be percent-encoded.
+- `host:port`: host and port of the mongosh instance
+- `defaultauthdb`: the authentication database to use if the connexion string includes `username@password` but the `authSource` is nt included in the authstring options.
+
+### Examples
+
+```
+# standard connexion after a fresh install
+mongodb://127.0.0.1/
+```
+
+--- 
+
+## Troubleshooting and fixes
+
+### `exit code 14`
+
+`sudo systemctl start mongod` can fail with `exit code 14` if a previous `mongod` instance was badly killed. [info](https://stackoverflow.com/a/53494635)
+
+SOLUTION: delete the `sock` connexion file. `27017` is the `mongod` port. if you use another one, update the filename below.
+
+```bash
+sudo rm /tmp/mongodb-27017.sock
+sudo systemctl start mongod
+```
 
