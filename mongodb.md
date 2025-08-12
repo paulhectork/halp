@@ -1,6 +1,6 @@
 # MONGO DB
 
-the use case is MongoDB community edition used in Ubuntu/Linux, in a self-hosted context.
+The use case is MongoDB community edition used in Ubuntu/Linux, in a self-hosted context.
 
 ---
 
@@ -43,7 +43,7 @@ use <dbName>  // switch to database `<dbName>`. creates it if it does not exist
 
 ## Users
 
-`users` have the same role as in PostgreSQL : they are an authentication mechanism to manage databases and users. 
+Users have the same role as in PostgreSQL : they are an authentication mechanism to manage databases and users. 
 - `users` are granted specific `roles` on `databases` that define what they can do on a database.
 - **an `authentication database`** is always associated to a user: it is a database that stores permissions for a user. it is not specific to that user (an authentication db can have multiple users). you can define authorizations for the user to access other databases.
 - **by default, no users are created**: you can access a database without authentication.
@@ -54,9 +54,9 @@ use <dbName>  // switch to database `<dbName>`. creates it if it does not exist
 
 #### Create the user administrator (first user)
 
-[source](https://www.mongodb.com/docs/manual/tutorial/configure-scram-client-authentication/)
+[(source)](https://www.mongodb.com/docs/manual/tutorial/configure-scram-client-authentication/)
 
-you will need to restart mongodb after creating the user
+You will need to restart mongodb after creating the user in order to restart mongodb with authentication.
 
 1. **start `mongod` and connect to it** without authentication
 
@@ -114,9 +114,9 @@ mongosh --port 27017 \
 
 ### URI anatomy 
 
-[source](https://www.mongodb.com/docs/manual/reference/connection-string/#find-your-self-hosted-deployment-s-connection-string)
+[(source)](https://www.mongodb.com/docs/manual/reference/connection-string/#find-your-self-hosted-deployment-s-connection-string)
 
-**connexion string anatomy**
+**Connexion string anatomy:**
 - [SRV format](https://www.mongodb.com/docs/manual/reference/connection-string/#std-label-connections-dns-seedlist)
     ```
     mongodb+srv://[username:password@]host[/[defaultauthdb][?options]]
@@ -129,7 +129,7 @@ mongosh --port 27017 \
     - the syntax of both URIs is the same; adding `+srv` to the prefix will indicate that we are using an SRV connexion to `mongod`.
     - if you are logged in `mongosh`, `db.getMongo()` will return the conexion string.
 
-**parameters**
+**Connexion string parameters:**
 - `username@password`: pretty straightforward, right ?
     - NOTE characters `$ : / ? # [ ] @` in the usename and password MUST be percent-encoded.
 - `host:port`: host and port of the mongosh instance
