@@ -28,9 +28,27 @@ mongosh
 
 ## Databases
 
-- the default databases in self-hosted localhost are `admin`, `config`, `local`
-- `use <dbName>` is the `mongosh` command to create a database
-- a database is NOT created UNTIL data is written in it
+### Databases, collections, documents
+
+A MongoDB `database` stores `collections` of `documents`.
+- a `document` is a record stored in [BSON](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-BSON), a binary format based on JSON
+- a `collection` is a group of documents, and the equivalent of an SQL table
+    - a collection does **not enforce a schema**
+    - they are stored in a single database
+- a `database` is a container for a collection.
+
+Create a database: 
+- a database is NOT created UNTIL data is written in it. 
+- `use <dbName>` will switch to a (new) database, but if it does not exist, you need to write data to the database.
+
+Create a collection:
+- a collection is implicitly created when writing data in it
+- `db.createCollection()` explicitly creates a collection. It can be used to enforce custom options.
+
+```js
+use myNewDB
+db.myNewCollection1.insertOne( { x: 1 } )
+```
 
 ### Helper `mongosh` commands 
 
