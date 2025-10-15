@@ -14,8 +14,8 @@
 
 - $$\mathbb{E}$$: expected value / espérance mathématique 
     - $$\mathbb{E}(X)$$ is the probability to obtain $$X$$.
-- $$\~$$: tiré de / randomly extracted from a distribution.
+- $$\sim$$: tiré de / randomly extracted from a distribution.
     - given: 
         - $$X$$ and $$Y$$ 2 sets
         - $$Z=(X,Y)$$ the distribution of $$(X,Y)$$ along a probability function $$P$$ ($$Z$$ is all the possible $$(x,y)$$ pairs distributed along $$P$$)
-    - $$(x,y)~Z$$ means "a tuple $$(x,y)$$" randomly extracted from a distribution
+    - $$(x,y)\sim{}Z$$ means "a tuple $$(x,y)$$ randomly extracted from a distribution $$Z$$"
