@@ -11,18 +11,18 @@
 - $$\neg$$: logical negation
 - $$\lor$$: logical or
 - $$\land$$: logical and
-- $$top$$: true or always true
-- $$bot$$: false or always false
+- $$\top$$: true or always true
+- $$\bot$$: false or always false
 
 ---
 
 ## Sets
 
 **Some sets**
-- $$\R$$: real numbers
-- $$\N$$: natural numbers (positive integers)
-- $$\Z$$: integers
-- $$\Q$$: rational numbers (fraction of 2 integers)
+- $$\mathbb{R}$$: real numbers
+- $$\mathbb{N}$$: natural numbers (positive integers)
+- $$\mathbb{Z}$$: integers
+- $$\mathbb{Q}$$: rational numbers (fraction of 2 integers)
 
 **Relations between sets**
 
@@ -30,18 +30,18 @@
 - $$\cap$$: intersection
 - $$\cup$$: union
 - $$\subset$$: inclusion: $$x \subset y$$ means that $$x$$ includes $$y$$
-- $$\superset$$: superset: $$x \superset y$$ means that $$x$$ is included by $$y$$
+- $$\supset$$: superset: $$x \supset y$$ means that $$x$$ is included by $$y$$
 - $$\ni$$: contains: $$x \ni y$$ means that $$x$$ contains $$y$$
-- $$\\$$ or $$-$$: set difference. $$Z = X \\ Y$$ means that $$Z$$ is formed by the elements of $$X$$that are not in $$Y$$
+- $$\setminus$$ or $$-$$: set difference. $$Z = X \setminus Y$$ means that $$Z$$ is formed by the elements of $$X$$that are not in $$Y$$
 - $$\times$$: cartesian product
-- $$\R^{n}$$:  $$n$$ being a positive integer, describes a space of vectors of dimension $$n$$ made of real numbers
+- $$\mathbb{R}^{n}$$:  $$n$$ being a positive integer, describes a space of vectors of dimension $$n$$ made of real numbers
     - $$x \in \mathbb{R}^{2}$$ => $$x = (1,2)$$
     - $$x \in \mathbb{R}^{3}$$ => $$x = (1,2,3)$$
 
 
 **Other**
-- $$\emptyset$$ or $$\{\}$$: empty set
-- $$#X$$ or $$|X|$$: number of elements of set $$X$$
+- $$\emptyset$$ or $$\{ \}$$: empty set
+- $$\#X$$ or $$|X|$$: number of elements of set $$X$$
 
 ---
 
@@ -52,8 +52,8 @@
 - $$\otimes$$: tensor product 
 - $$\oplus$$: direct sum
 - $$M^{T}$$: transposition
-- $$||X||$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
-    - $$||y - x||$$ is the distance between 2 vectors $$y$$ and $$x$$.
+- $$\|X\|$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
+    - $$\|y - x\|$$ is the distance between 2 vectors $$y$$ and $$x$$.
 
 ---
 
