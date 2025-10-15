@@ -32,7 +32,7 @@
 - $$\subset$$: inclusion: $$x \subset y$$ means that $$x$$ includes $$y$$
 - $$\supset$$: superset: $$x \supset y$$ means that $$x$$ is included by $$y$$
 - $$\ni$$: contains: $$x \ni y$$ means that $$x$$ contains $$y$$
-- $$\setminus$$ or $$-$$: set difference. $$Z = X \setminus Y$$ means that $$Z$$ is formed by the elements of $$X$$that are not in $$Y$$
+- $$\setminus$$ or $$-$$: set difference. $$Z = X \setminus Y$$ means that $$Z$$ is formed by the elements of $$X$$ that are not in $$Y$$
 - $$\times$$: cartesian product
 - $$\mathbb{R}^{n}$$:  $$n$$ being a positive integer, describes a space of vectors of dimension $$n$$ made of real numbers
     - $$x \in \mathbb{R}^{2}$$ => $$x = (1,2)$$
