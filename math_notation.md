@@ -52,14 +52,14 @@
 - $$\otimes$$: tensor product 
 - $$\oplus$$: direct sum
 - $$M^{T}$$: transposition
-- $$\|X\|$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
-    - $$\|y - x\|$$ is the distance between 2 vectors $$y$$ and $$x$$.
 
 ---
 
 ## Vectors
 
 - $$X \times Y$$, with $$X$$ and $$Y$$ vector spaces, is the **cartesian product** of $$X$$ with $$Y$$
+- $$\|X\|$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
+    - $$\|y - x\|$$ is the distance between 2 vectors $$y$$ and $$x$$.
 
 ---
 
