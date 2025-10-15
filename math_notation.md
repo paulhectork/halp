@@ -40,8 +40,8 @@
 
 
 **Other**
-- $$\emptyset$$ or $$\{ \}$$: empty set
-- $$\#X$$ or $$|X|$$: number of elements of set $$X$$
+- $$\emptyset$$: empty set
+- `#X` or $$|X|$$: number of elements of set $$X$$
 
 ---
 
@@ -58,8 +58,8 @@
 ## Vectors
 
 - $$X \times Y$$, with $$X$$ and $$Y$$ vector spaces, is the **cartesian product** of $$X$$ with $$Y$$
-- $$\|X\|$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
-    - $$\|y - x\|$$ is the distance between 2 vectors $$y$$ and $$x$$.
+- $$||X||$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
+    - $$||y - x||$$ is the distance between 2 vectors $$y$$ and $$x$$.
 
 ---
 
