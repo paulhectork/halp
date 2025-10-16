@@ -34,32 +34,29 @@
 - $$\ni$$: contains: $$x \ni y$$ means that $$x$$ contains $$y$$
 - $$\setminus$$ or $$-$$: set difference. $$Z = X \setminus Y$$ means that $$Z$$ is formed by the elements of $$X$$ that are not in $$Y$$
 - $$\times$$: cartesian product
-- $$\mathbb{R}^{n}$$:  $$n$$ being a positive integer, describes a space of vectors of dimension $$n$$ made of real numbers
-    - $$x \in \mathbb{R}^{2}$$ => $$x = (1,2)$$
-    - $$x \in \mathbb{R}^{3}$$ => $$x = (1,2,3)$$
-
 
 **Other**
 - $$\emptyset$$: empty set
 - `#X` or $$|X|$$: number of elements of set $$X$$
+- $$\mathbb{R}^{n}$$: all $$n$$-uples whose members belong to $$\mathbb{R}$$. See `linear algebra`.
 
 ---
 
 ## Linear algebra
 
+Linear algebra works on vector spaces and linear transforms.
+
 - $$\Sigma$$: sum 
 - $$\Pi$$: product
-- $$\otimes$$: tensor product 
-- $$\oplus$$: direct sum
+- $$\otimes$$: tensor product of 2 vectors or matrices
+- $$\oplus$$: direct sum of 2 vectors or matrices
 - $$M^{T}$$: transposition
-
----
-
-## Vectors
-
 - $$X \times Y$$, with $$X$$ and $$Y$$ vector spaces, is the **cartesian product** of $$X$$ with $$Y$$
 - $$||X||$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
     - $$||y - x||$$ is the distance between 2 vectors $$y$$ and $$x$$.
+- $$\mathbb{R}^{n}$$: defines a vector space of dimension $$n$$. $$n$$ being a positive integer, all vectors belonging to $$\mathbb{R}^{n} are of size $$n$$.
+    - $$x \in \mathbb{R}^{2}$$ => $$x = (1,2)$$
+    - $$x \in \mathbb{R}^{3}$$ => $$x = (1,2,3)$$
 
 ---
 
