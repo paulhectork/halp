@@ -66,6 +66,6 @@ Linear algebra works on vector spaces and linear transforms.
     - $$\mathbb{E}(X)$$ is the probability to obtain $$X$$.
 - $$\sim$$: tiré de / randomly extracted from a distribution.
     - given: 
-        - $$X$$ and $$Y$$ 2 sets
+        - $$X$$ and $$Y$$ 2 sets, $$x \in X$$ and $$y \in Y$$
         - $$Z=(X,Y)$$ the distribution of $$(X,Y)$$ along a probability function $$P$$ ($$Z$$ is all the possible $$(x,y)$$ pairs distributed along $$P$$)
     - $$(x,y) \sim Z$$ means "a tuple $$(x,y)$$ randomly extracted from a distribution $$Z$$"
