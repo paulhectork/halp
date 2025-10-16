@@ -57,6 +57,7 @@ Linear algebra works on vector spaces and linear transforms.
 - $$\mathbb{R}^{n}$$: defines a vector space of dimension $$n$$. $$n$$ being a positive integer, all vectors belonging to $$\mathbb{R}^{n}$$ are of size $$n$$.
     - $$x \in \mathbb{R}^{2}$$ => $$x = (1,2)$$
     - $$x \in \mathbb{R}^{3}$$ => $$x = (1,2,3)$$
+- $$\text{argmax}$$ / $$\text{argmin}$$: input points at which the output value of a function is maximised/minimised (parameters for which you get the biggest/smallest value) 
 
 ---
 
