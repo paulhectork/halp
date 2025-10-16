@@ -69,9 +69,10 @@ Linear algebra works on vector spaces and linear transforms.
     - given: 
         - $$X$$ and $$Y$$ 2 sets, $$x \in X$$ and $$y \in Y$$
         - $$Z=(X,Y)$$ the distribution of $$(X,Y)$$ along a probability function $$P$$ ($$Z$$ is all the possible $$(x,y)$$ pairs distributed along $$P$$)
+        - $$E_(x,y) \sim Z$$: the expectation for all tuples $$(x,y)$$ extracted from $$Z$$
     - $$(x,y) \sim Z$$ means "a tuple $$(x,y)$$ randomly extracted from a distribution $$Z$$"
 - $$\mathbb{E}[expr]$$: the brackets are the argument of $$\mathbb{E}$$: we are calculating the expectation to obtain a certain result with function $$expr$$.
-    - so: $$\mathbb{E}_{(x,y)~Z}[l(f(x),y)]$$, means that:
-        - $$\mathbb{E}_{(x,y)~Z}$$: we are calculating $$\mathbb{E}$$ using all $$(x,y)$$ values that exist in $$Z$$
+    - so: $$\mathbb{E}_{(x,y) \sim Z}[l(f(x),y)]$$, means that:
+        - $$\mathbb{E}_{(x,y) \sim Z}$$: we are calculating $$\mathbb{E}$$ using all $$(x,y)$$ values extracted from $$Z$$
         - $$l(f(x),y)$$ is calculated over all values of $$Z$$ (it is a loss function comparing the output of function $$f$$ to an expected $$y$$)
         - $$\mathbb{E}$$ is the average of all results of $$l(f(x),y)$$ for all $$(x,y)$$ in $$Z$$
