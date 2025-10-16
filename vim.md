@@ -40,7 +40,7 @@ The config file is `~/.vimrc`.
 
 ### Tabs
 
-- `:tabnew` /  `:tabnew {filename}`: open file in new tab
+- `:tabnew` /  `:tabnew [filename]`: open file in new tab
 - `gt` / `:tabn`: move to next tab
 - `gT` / `:tabp`: move to previous file
 - `#gt` / move to tab number `#`
