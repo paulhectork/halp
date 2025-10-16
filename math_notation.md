@@ -76,5 +76,5 @@ Linear algebra works on vector spaces and linear transforms.
 So: $$\mathbb{E}_{(x,y) \sim Z}[l(f(x),y)]$$ means that:
 - $$l(f(x),y)$$ is the function we're calculating the expectation $$\mathbb{E}$$ of. $$l$$ is a loss function comparing the actual output $$f(x)$$ with expected output $$y$$
 - $$\mathbb{E}_{(x,y) \sim Z}$$: we are calculating $$\mathbb{E}$$ using all $$(x,y)$$ values extracted from $$Z$$
-- $$l(f(x),y)$$ is calculated over all values of $$Z$$ ($$l$$ is a loss function comparing the output of function $$f$$ to an expected $$y$$)
+- $$l(f(x),y)$$ is calculated over all values of $$Z$$ ($$l$$ is a loss function comparing the output of function $$f$$ to an expected $$y$$
 - => $$\mathbb{E}_{(x,y) \sim Z}[l(f(x),y)]$$ means that we're averaging the loss $$l(f(x), y)$$ over all $$(x, y)$$ pairs that could be drawn from $$Z$$
