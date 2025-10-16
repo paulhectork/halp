@@ -65,14 +65,16 @@ Linear algebra works on vector spaces and linear transforms.
 - $$\mathbb{E}$$: expectation / espérance mathématique 
     - $$\mathbb{E}(X)$$ is the probability to obtain $$X$$.
     - $$\mathbb{E}$$ is a generalisation of the mean (average). for a random variable, the expectation gives the average value you would get if you repeated an experiment many times.
+- $$\mathbb{E}[expr]$$: the brackets are the argument of $$\mathbb{E}$$: we are calculating the expectation to obtain a certain result with function $$expr$$.
 - $$\sim$$: tiré de / randomly extracted from a distribution.
     - given: 
         - $$X$$ and $$Y$$ 2 sets, $$x \in X$$ and $$y \in Y$$
         - $$Z=(X,Y)$$ the distribution of $$(X,Y)$$ along a probability function $$P$$ ($$Z$$ is all the possible $$(x,y)$$ pairs distributed along $$P$$)
-        - $$E_(x,y) \sim Z$$: the expectation for all tuples $$(x,y)$$ extracted from $$Z$$
-    - $$(x,y) \sim Z$$ means "a tuple $$(x,y)$$ randomly extracted from a distribution $$Z$$"
-- $$\mathbb{E}[expr]$$: the brackets are the argument of $$\mathbb{E}$$: we are calculating the expectation to obtain a certain result with function $$expr$$.
-    - so: $$\mathbb{E}_{(x,y) \sim Z}[l(f(x),y)]$$, means that:
-        - $$\mathbb{E}_{(x,y) \sim Z}$$: we are calculating $$\mathbb{E}$$ using all $$(x,y)$$ values extracted from $$Z$$
-        - $$l(f(x),y)$$ is calculated over all values of $$Z$$ (it is a loss function comparing the output of function $$f$$ to an expected $$y$$)
-        - $$\mathbb{E}$$ is the average of all results of $$l(f(x),y)$$ for all $$(x,y)$$ in $$Z$$
+    - => $$(x,y) \sim Z$$ means "a tuple $$(x,y)$$ randomly extracted from a distribution $$Z$$"
+    - $$E_{(x,y) \sim Z}$$: the expectation for all tuples $$(x,y)$$ extracted from $$Z$$
+
+So: $$\mathbb{E}_{(x,y) \sim Z}[l(f(x),y)]$$ means that:
+    - $$l(f(x),y)$$ is the function we're calculating the expectation $$\mathbb{E}$$ of. $$l$$ is a loss function comparing the actual output $$f(x)$$ with expected output $$y$$
+    - $$\mathbb{E}_{(x,y) \sim Z}$$: we are calculating $$\mathbb{E}$$ using all $$(x,y)$$ values extracted from $$Z$$
+    - $$l(f(x),y)$$ is calculated over all values of $$Z$$ ($$l$$ is a loss function comparing the output of function $$f$$ to an expected $$y$$)
+    - => $$\mathbb{E}_{(x,y) \sim Z}[l(f(x),y)]$$ means that we're averaging the loss $$l(f(x), y)$$ over all $$(x, y)$$ pairs that could be drawn from $$Z$$
