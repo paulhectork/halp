@@ -36,7 +36,7 @@ The config file is `~/.vimrc`.
 
 - `/pattern`: search for pattern
 - `?pattern`: backward search
-- `%s/old/new/g`: replace old with new throughout file
+- `:%s/old/new/g`: replace old with new throughout file
 
 ### Tabs
 
