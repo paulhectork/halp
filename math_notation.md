@@ -60,7 +60,8 @@ Linear algebra works on vector spaces and linear transforms.
     - $$x \in \mathbb{R}^{3}$$ => $$x = (1,2,3)$$
 - $$\text{argmax}$$ / $$\text{argmin}$$: input points at which the output value of a function is maximised/minimised (parameters for which you get the biggest/smallest value) 
 - $$I_n$$: identity matrix (a square matrix of size $$n$$ where the diagonal values are $$1$$ and all other values $$0$$): 
-    $$I_3 = \begin{pmatrix} 1 & 0 & 0\\\ 0 & 1 & 0\\\ 0 & 0 & 1\end{pmatrix}$$
+
+$$I_3 = \begin{pmatrix} 1 & 0 & 0\\\ 0 & 1 & 0\\\ 0 & 0 & 1\end{pmatrix}$$
 
 ---
 
