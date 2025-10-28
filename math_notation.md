@@ -63,8 +63,8 @@ Linear algebra works on vector spaces and linear transforms.
     $$
     I_3 =
     \begin{pmatrix}
-    1 & 0 & 0\\\
-    0 & 1 & 0\\\
+    1 & 0 & 0\\\\
+    0 & 1 & 0\\\\
     0 & 0 & 1
     \end{pmatrix}
     $$
