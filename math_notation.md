@@ -45,19 +45,6 @@
 
 ## Linear algebra
 
-Tensors, matrices, vectors:
-
-- **a vector** is a 1-dimensional array: 
-
-$$v =\begin{pmatrix} x & y & z \end{pmatrix}$$
-
-- **a matrix** is a 2-dimensional array: 
-
-$$m =\begin{pmatrix} a & b & c\\\ x & y & z \end{pmatrix}$$
-
-- **a tensor** is an n-dimensional array => **a tensor is a generalization of matrices to any number of dimensions**: 1D tensor = vector, 2D tensor = matrix...
-- in deep learning, we use tensors as a general term for n-dimensional arrays.
-
 Linear algebra works on vector spaces and linear transforms.
 
 - $$\Sigma$$: sum 
@@ -75,6 +62,20 @@ Linear algebra works on vector spaces and linear transforms.
 - $$I_n$$: identity matrix (a square matrix of size $$n$$ where the diagonal values are $$1$$ and all other values $$0$$): 
 
 $$I_3 = \begin{pmatrix} 1 & 0 & 0\\\ 0 & 1 & 0\\\ 0 & 0 & 1\end{pmatrix}$$
+
+Tensors, matrices, vectors:
+
+- **a vector** is a 1-dimensional array: 
+
+$$v =\begin{pmatrix} x & y & z \end{pmatrix}$$
+
+- **a matrix** is a 2-dimensional array: 
+
+$$m =\begin{pmatrix} a & b & c\\\ x & y & z \end{pmatrix}$$
+
+- **a tensor** is an n-dimensional array => **a tensor is a generalization of matrices to any number of dimensions**: 1D tensor = vector, 2D tensor = matrix...
+- in deep learning, we use tensors as a general term for n-dimensional arrays.
+
 
 ---
 
