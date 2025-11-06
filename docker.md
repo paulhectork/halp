@@ -63,7 +63,7 @@ For example:
 
 ### `images`: list all images
 
-```docker
+```bash
 docker images
 ```
 
@@ -71,7 +71,7 @@ List all Docker images. An image is created after running `docker build`
 
 ### `ps` and `ls`: list containers
 
-```docker
+```bash
 docker ps
 ```
 
@@ -88,7 +88,7 @@ See: https://stackoverflow.com/a/16842203
 
 ### `RUN`
 
-```docker
+```bash
 RUN <command>
 ```
 
@@ -96,7 +96,7 @@ Runs a shell command, where `<command>` is either in shell form or in array form
 
 To run a multiline command:
 
-```docker
+```bash
 RUN <<EOF
 apt-get update
 apt-get install -y curl
@@ -113,7 +113,7 @@ See: https://stackoverflow.com/a/67548336
 
 ### `CMD`
 
-```docker
+```bash
 CMD <command> <param1> <param2>
 # or
 CMD ["executable","param1","param2"]
@@ -128,7 +128,7 @@ CMD ["param1","param2"]
 
 ### `COPY`
 
-```docker
+```bash
 COPY <src> <dst>
 ```
 
@@ -138,13 +138,13 @@ Where:
 
 ### `WORKDIR`
 
-```docker
+```bash
 WORKDIR <path>
 ```
 
 Sets the **path of the working directory** in your Docker image. It can be used **several times** in a Dockerfile:
 
-```docker
+```bash
 WORKDIR /var/www/html
 RUN echo "Hello world !" > hello.txt
 WORKDIR /
@@ -152,7 +152,7 @@ WORKDIR /
 
 ### `ENV`
 
-```docker
+```bash
 ENV <var_name>=<value>
 ```
 
@@ -160,7 +160,7 @@ Defines an env variable for that docker image.
 
 ### `ARG`
 
-```docker
+```bash
 ARG <name>[=<default value>]
 ```
 
@@ -173,7 +173,7 @@ docker build --build-arg <varname>=<value>
 
 ### `FROM`
 
-```docker
+```bash
 FROM <image> [AS <name>]
 ```
 
@@ -181,7 +181,7 @@ Defines the base image to use in your Dockerfile.
 - **it MUST be on top** of the Dockerfile. Only `ARG` may be used before, if `ARG` is used to provide arguments to the `FROM` command.
 - if `AS <name>` is used, the `name` can be used to refer to this base image, which can be useful when using several `FROM` in a file.
 
-```docker
+```bash
 ARG VERSION=latest
 FROM busybox:$VERSION
 ARG VERSION
