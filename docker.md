@@ -30,7 +30,7 @@ docker build -f <path to Dockerfile> -t <image name> .
 Where:
 - `-t` provides the name of the Docker container you want to create
 - `-f` provides the path to the Dockerfile
-- `.` is the build context
+- `.` is the build context (`.` = current directory, `..` = previous directory, ...): what is accessible to the Docker container.
 
 NOTES: 
 - after modifying a Dockerfile, you need to rebuild it !
