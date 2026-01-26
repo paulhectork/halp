@@ -1,13 +1,32 @@
 # Publish a library on NPM and set it up
 
+## Publish an NPM package (jan. 2026)
+
+Since the end of 2025, to publish, you need to either enable 2FA or to have an access token with "bypass 2FA" enabled.
+
+1. Create an access token with Read/Write permissions on your package and "bypass 2FA" enabled: `Account/Access tokens`
+2. Update your NPM config with an access token: 
+    ```bash
+    export NPM_TOKEN="YOUR_TOKEN"
+    npm config set //registry.npmjs.org/:_authToken "${NPM_TOKEN}"
+    ```
+3. Publish your package
+    ```bash
+    npm publish
+    ```
+
+It is also possible to update your `.npmrc` file.
+
+## Publish with an NPM package with MongDB
+
 > This is a chatgpt guide on how to publish an app with a mongodb database on NPM and set up the mong o database for the project.
 
-## TLDR
+### TLDR
 
 - you can't install MongoDB from an NPM package. 
 - you must create JS scripts that generate the database, do migrations etc, populate it.
 
-## 1\. **NPM Package Structure**
+### 1\. **NPM Package Structure**
 
 Your NPM package should have the following basic structure:
 
@@ -27,11 +46,11 @@ your-package/
 
 ---
 
-## 2\. **Configuration File**
+### 2\. **Configuration File**
 
 Best practice is to use something like [`config`](https://www.npmjs.com/package/config) or `.env` with [`dotenv`](https://www.npmjs.com/package/dotenv) for database connection configuration.
 
-### Example `config/default.json`:
+#### Example `config/default.json`:
 
 JSON:
 ```js
@@ -54,14 +73,14 @@ MONGO_PASS=yourpassword
 
 ---
 
-## 3\. **Database Creation & Migrations**
+### 3\. **Database Creation & Migrations**
 
 *   **Migrations:** Use a library like [`migrate-mongo`](https://www.npmjs.com/package/migrate-mongo) or roll your own scripts in the `migrations/` folder.
 *   **Database Creation:** MongoDB will auto-create a database upon first connection if it doesn't exist. So _simply connecting/writing data_ is sufficient.
 
 ---
 
-## 5\. **Setup Script**
+### 5\. **Setup Script**
 
 A `bin/setup.js` script can guide the user through configuration, connecting to Mongo, and running migrations.  
 Add in `package.json`:
@@ -105,7 +124,7 @@ Make it executable: `chmod +x bin/setup.js`
 
 - - -
 
-## 6\. **Publishing to NPM**
+### 6\. **Publishing to NPM**
 
 1.  Set up your `package.json` with required fields.
 2.  Make sure not to include `node_modules`, and never bundle the MongoDB binary itself.
@@ -114,7 +133,7 @@ Make it executable: `chmod +x bin/setup.js`
 
 - - -
 
-## 7\. **Instruct Users on MongoDB Installation**
+### 7\. **Instruct Users on MongoDB Installation**
 
 Your `README.md` **must** tell users to:
 
@@ -126,7 +145,7 @@ You might optionally provide helper scripts to download/test-run local MongoDB f
 
 - - -
 
-## **Summary Table**
+### **Summary Table**
 
 | Requirement | Possible in NPM? | Best Practice |
 | --- | --- | --- |
