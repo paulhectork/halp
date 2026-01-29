@@ -189,6 +189,7 @@ Where:
     - **field order** is crucial: in the example above, we first sort by `motivation` before sorting on `@id` for each `motivation`.
     - this means that doing `myCollection.sort({ "@id": 1, "motivation": 1 })` WILL NOT benefit from the index defined above.
 - `multikey index`: when doing an index on values in an array, a MultiKey index is created.
+    - **it is useful to accelerate filters**: all indexed values are stored in an array, and documents containing that value will be retrieved using the index
     - **it does not sort the documents**, it sorts the item in the array.
     - **to sort the documents, you need to denormalize**: extract the value you actually want to sort your collection by and insert it as a scalar, outside of the array.
     - *example of denormalization*: 
