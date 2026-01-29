@@ -160,6 +160,75 @@ mongosh --port 27017 \
 mongodb://127.0.0.1/
 ```
 
+---
+
+## Indexes
+
+Indexes speeds up queries: it replaces table lookups and removes the need for full collection scans.
+
+Indexes can also **add constraints to a collection**, like UNIQUE constraints or sorting.
+
+### In short
+
+Minimally, an index is defined by: 
+
+```js
+{ "<fieldName>": 1/-1 }
+````
+
+Where: 
+- `"<fieldName>"` is the name of the field you index
+- `1/-1` is the sorting order: `1` is ascending, `-1` is descending.
+
+**Indexes are ordered**: they store records by the order described in the index. In `{ "canvasIdx": 1 }`, the index will be ordered by values of `canvasIdx`, ascending. In turn, they can **be used to speed up sorts**.
+
+### Types of indexes
+
+- `single field index`: simple indexes on a single field: `{ "@id": 1 }`
+- `compound index`: indexes on multiple fields: `{ "motivation": 1, "@id": 1 }`
+    - **field order** is crucial: in the example above, we first sort by `motivation` before sorting on `@id` for each `motivation`.
+    - this means that doing `myCollection.sort({ "@id": 1, "motivation": 1 })` WILL NOT benefit from the index defined above.
+- `multikey index`: when doing an index on values in an array, a MultiKey index is created.
+    - **it does not sort the documents**, it sorts the item in the array.
+    - **to sort the documents, you need to denormalize**: extract the value you actually want to sort your collection by and insert it as a scalar, outside of the array.
+    - *example of denormalization*: 
+        - source document: `{ id: 1, k: [{ a: 2 }, { a: 3 }, { a: 1 }] }`
+        - denormalized version: 
+        ```js
+        {
+            id: 1,
+            k: [{ a: 2 }, { a: 3 }, { a: 1 }],
+            k_a_primary: 1  // extracted the smalled value of `k`
+        }
+        ```
+
+### Combining filters and sort indexes and ESR patterns
+
+Sorting based on an index only works if we sort the entire collection OR if the filter keys are also part of the index:
+
+- A sort index is useless if the filter is not indexed
+- You need a filter index first, then the sort can be optimized.
+- Without an index on the filter, expect full collection scan + in-memory sort — expensive.
+
+To do filter+sorting, a single compound index must contain all filter fields and sort fields. Your filter needs to follow the [**ESR pattern**](https://www.mongodb.com/docs/manual/tutorial/equality-sort-range-guideline/).
+
+- `E` **equality**: first, the fields on which you are filtering (using an exact match)
+- `S` **sort**: second, the fields on which you are sorting
+- `R` **range**: `$gt`, `$lt`, `$regex` etc. are range filters. They don't require an exact match and are bound to index keys.
+
+```js
+// the query
+db.cars.find(
+   {
+       manufacturer: 'Ford',
+       cost: { $gt: 15000 }
+   } ).sort( { model: 1 } )
+
+
+// the ESR sort
+{ manufacturer: 1, model: 1, cost: 1 }
+```
+
 --- 
 
 ## Troubleshooting and fixes
