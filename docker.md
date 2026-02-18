@@ -194,6 +194,8 @@ RUN echo $VERSION > image_version
 
 ### Environment management
 
+[source](https://stackoverflow.com/a/64723491)
+
 There is a difference between:
 1. the env variables **passed to the containers**
 2. the env variables **available to the docker-compose by variable substitution**.
