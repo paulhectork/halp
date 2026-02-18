@@ -221,7 +221,6 @@ services:
     a:
         env_file: 
             - ../app/.env  # relative path from docker-compose to .env
-        # ...
 ```
 
 This means that:
