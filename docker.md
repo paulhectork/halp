@@ -84,7 +84,7 @@ See: https://stackoverflow.com/a/16842203
 
 ---
 
-## Dockerfile instructions
+## Dockerfile instructions / syntax
 
 ### `RUN`
 
@@ -187,3 +187,71 @@ FROM busybox:$VERSION
 ARG VERSION
 RUN echo $VERSION > image_version
 ```
+
+---
+
+## Docker-compose instructions / syntax
+
+### Environment management
+
+There is a difference between:
+1. the env variables **passed to the containers**
+2. the env variables **available to the docker-compose by variable substitution**.
+
+We use this file structure as an example:
+
+```bash
+/
+|_app/
+| |_.env             # a .env file for the docker containers
+|_docker/
+  |_Dockerfile.a     # Dockerfile of container A
+  |_Dockerfile.b     # Dockerfile of container B
+  |_docker-compose   # docker-compose orchestrating A and B 
+```
+
+#### 1. `env_file`: Passing an env variable to a container
+
+In a docker-compose, the `env_file` field is used to **inject the environment variables from a .env file in the container.**
+
+```yaml
+services:
+    a:
+        env_file: 
+            - ../app/.env  # relative path from docker-compose to .env
+        # ...
+```
+
+This means that:
+- the docker-compose will read the `.env` files listed in `env_file` and make environment variables defined there **accessible to the Docker container's execution environment**
+- the `docker-compose` itself **will not have access to the variables defined in .env**.
+
+Taking the above example: the variables in `app/.env`
+- can't be referenced in `docker/docker-compose`
+- will be accessible to `docker/Dockerfile.a`.
+
+#### 2. Variable substitution: using env variables in a docker-compose
+
+You can make env variables accessible to a docker-compose:
+
+- Using `docker-compose --env-file`:
+    ```bash
+    docker-compose --env-file ../app/.env up
+    ```
+- Creating a `.env` in the same folder as the docker-compose:
+    ```
+    /
+    |_docker/
+      |_docker-compose
+      |_.env  # variables in this  will be acessible to the docker-compose.
+    ```
+- Defining the variables in the execution environment in a bash way:
+    ```bash
+    source ../app/.env
+    docker-compose up
+    
+    # or
+    export MYVAR=myval  # ${MYVAR} will now be accessible to docker-compose
+    docker-compose up
+    ```
+
