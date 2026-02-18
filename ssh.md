@@ -30,7 +30,7 @@ Host <host-name>
 
 You may use a proxy server: to conect to a target server, you have to first connect to a proxy-server. In this case, your config might look like:
 
-```
+```bash
 # the proxy server
 Host proxy
     Hostname <ip-address>
