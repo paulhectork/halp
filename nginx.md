@@ -4,6 +4,8 @@
 
 nginx servers are configured using config files that are placed in the nginx directory, usually `/etc/nginx`. But where ?
 
+---
+
 ### Folder structure and adding a new nginx config
 
 ```
@@ -27,6 +29,8 @@ In the example above, we have 3 places where to put our config:
 
 **TLDR**: don't touch the global `nginx.conf`. To load a config, add it to `sites-available`, symlink it to `sites-enabled` and reload your conf.
 
+---
+
 ### Loading, reloading, stopping an nginx config
 
 Once you've got your nginx installed:
@@ -45,6 +49,8 @@ Basicaly, `nginx -s reload` will reload the global `nginx.conf`, which will relo
 ## Configuration file structure
 
 Nginx config files are made of **modules** controlle by **directives**.
+
+---
 
 ### Basic syntax
 
@@ -67,6 +73,8 @@ Nginx config files are made of **modules** controlle by **directives**.
 #### Other syntax
 
 - Regexes are prefixed with `~`: `~^www\d+\.example\.com$`
+
+---
 
 ### Some contexts
 
@@ -134,6 +142,8 @@ location ~ \.(gif|jpg|png)$ {
     root /data/images;
 }
 ```
+
+---
 
 ### Some directives
 
