@@ -105,7 +105,7 @@ http {
 Defines the configuration for a virtual server (aka a single app, or a website).
 - a config file can have several virtual servers: one for HTTP, one for HTTPS...
 - the `listen` directive defines the addresses and ports through which we can connect to the server.
-- the `server_name` gives a name to the server (duh)
+- the `server_name` specifies the name of the server (duh). See below
 - some example configs can be found [here](https://nginx.org/en/docs/http/request_processing.html)
 
 ```nginx
@@ -149,11 +149,41 @@ location ~ \.(gif|jpg|png)$ {
 
 #### `server_name`
 
-Define the name for a virtual server. A lot of options are possible (regex-matching, partial matching...). [See here](https://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) for more info.
+Define the host name for a virtual server. 
 
 ```nginx
 server {
     server_name www.example.com;
 }
 ```
+
+It is used to determine to which `server` block to use to process a request on the server. The server name is matched against the HTTP [`Host` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Host) (used to specify the host and optionally port number to which a server is sent). Server order is important: [see here](https://nginx.org/en/docs/http/server_names.html).
+
+```nginx
+server {
+    listen       80;
+    server_name  example.org  www.example.org;
+    ...
+}
+
+server {
+    listen       80;
+    server_name  *.example.org;
+    ...
+}
+
+server {
+    listen       80;
+    server_name  mail.*;
+    ...
+}
+
+server {
+    listen       80;
+    server_name  ~^(?<user>.+)\.example\.net$;
+    ...
+}
+```
+
+A lot of options are possible (regex-matching, partial matching...). [See here](https://nginx.org/en/docs/http/server_names.html) and [here](https://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) for more info.
 
