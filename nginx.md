@@ -50,6 +50,11 @@ Basicaly, `nginx -s reload` will reload the global `nginx.conf`, which will relo
 
 Nginx config files are made of **modules** controlle by **directives**.
 
+**TLDR**:
+- `http` defines your server
+- `server` = **host level**. It defines virtual servers (1 per website or app). The `server_name` directive is used to determine which `server` to use to process a request.
+- `location` = **path level**. Within a server, it defines different processings based on a URI's path.
+
 ---
 
 ### Basic syntax
