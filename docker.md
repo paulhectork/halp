@@ -268,7 +268,7 @@ Volumes are used:
 services:
     <container-name>:
         volumes:
-            - <host-volume>:<container-volume>
+            - <host-volume>:<container-volume>:flags?
 ```
 
 For example:
@@ -293,6 +293,20 @@ volumes:
 ```
 
 [See here for more info.](https://docs.docker.com/reference/compose-file/volumes/)
+
+#### Flags
+
+You can add flags to a volume mount:
+
+```yaml
+# syntax
+host-volume:container-volume:flags
+# example
+./nginx.conf:/etc/nginx/nginx.conf:ro
+```
+
+- `:ro` means **read-only**: the mount is read-only and you cannot write or delete its contents.
+
 
 #### Content overriding
 
