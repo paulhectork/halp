@@ -256,3 +256,55 @@ You can make env variables accessible to a docker-compose:
     docker-compose up
     ```
 
+### Volumes
+
+Volumes are used:
+1. **to mirror the contents** of a docker container and a host server
+2. **to share data between containers**, since the host server volume will be mounted in the container.
+
+#### Define a volume to mirror the contents of a container and a host
+
+```yaml
+services:
+    <container-name>:
+        volumes:
+            - <host-volume>:<container-volume>
+```
+
+For example:
+
+```yaml
+services:
+    nginx:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        - ../app/staticfiles:/home/aikon/app/staticfiles:ro
+```
+
+#### 2. Define a named volume
+
+To do this, you must define the top-level `volumes` declaration:
+
+```yaml
+services:
+    ...
+volumes:
+    <volume_name>:
+        <extra config (optional)>
+```
+
+[See here for more info.](https://docs.docker.com/reference/compose-file/volumes/)
+
+#### Content overriding
+
+**TLDR: Container runtime staticfiles == host staticfiles**
+
+**If a volume is mounted on a path, the image contents at that path are completely ignored.**
+
+If you have a container `containerA` and a volume `/app/webapp/static`, 
+- the host will have a folder `/app/webapp/static`
+- the container will have the same folder.
+
+BUT, at run time, **contents of the container folder will be overwritten by contents of the host volume**. 
+
+This means that, no matter what you see in containerA (i.e., running `docker exec -it docker-containerA-1 ls /app/webapp/static`), docker will override its contents with the volume on the host.
+
