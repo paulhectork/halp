@@ -55,7 +55,7 @@ sleep 3
 # import data
 curl -X POST -T export.nq \
   -H "Content-Type: application/n-quads" \
-  "http://localhost:3030/sas/data?graph=default"
+  "http://localhost:3030/sas/data"
 ```
 
 Check if the import worked by running this query (`?g` = query all graphs):
