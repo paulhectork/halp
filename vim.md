@@ -26,11 +26,28 @@ The config file is `~/.vimrc`.
 - `y$`: copy to the end of the line
 - `p`: put / paste after cursor
 - `P`: paste before cursor
+- `]p`: paste and align the pasted block's indentation with the surrounding block
+
+### Delete 
+
+To delete not in disual mode:
+
 - `d`: delete. `d` (+modifiers, somne below, other see cursor movements) copies deleted content to the buffer
 - `dw`: delete word
 - `dd`: delete line
 - `d$`: delete to end of line
-- `:3,5d`: delete lines starting from 3 to 5 
+- `%d`: delete all lines in a file
+- `:[begin],[end]d`: multi-line delete, where `begin` and `end` can be:
+    - line numbers: `:3,5d` deletes lines 3 to 5.
+    - `.`: the current line: `:.,3d`: delete from current line to line 3
+    - `$`: last line in file. `:.,$d` delete all lines from current line to last line
+    - `%`: all lines
+
+### Indent
+
+- `>>`: indent current line
+- `n>>`: indent `n` lines, starting from the current line (i.e., `5>>` indents 5 lines)
+- in visual mode, select the lines to indent, and then `>>`
 
 ### Search and replace
 
