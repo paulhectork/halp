@@ -322,3 +322,25 @@ BUT, at run time, **contents of the container folder will be overwritten by cont
 
 This means that, no matter what you see in containerA (i.e., running `docker exec -it docker-containerA-1 ls /app/webapp/static`), docker will override its contents with the volume on the host.
 
+---
+
+## Free up space
+
+```bash
+# List docker disk usage
+docker system df
+
+# Remove all unused containers, networks, images, and cache (everything EXCEPT volumes)
+docker system prune -a
+
+# Remove all unused volumes (⚠️ can delete important data if volumes are no longer attached to a container)
+docker volume prune
+# Preview what will be deleted by volume pruning
+docker volume ls -f dangling=true
+
+# Remove all stopped containers
+docker container prune
+
+# Remove all unused images
+docker image prune -a
+```
