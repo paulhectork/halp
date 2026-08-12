@@ -289,34 +289,34 @@ given `COMPOSE_FILE=compose1.yml:compose2.yml`,
     traversed and replacements are only done where a conflict occurs.
 - **replacement of values depend on field type**:
     - **scalar values: last one wins**
-    ```yaml
-    # `myapp.1.2.3` is kept in the final config
+        ```yaml
+        # `myapp.1.2.3` is kept in the final config
 
-    # compose2.yml
+        # compose2.yml
         services:
           web:
-        image: myapp:latest
+            image: myapp:latest
 
-    # compose1.yml
-    services:
-      web:
-        image: myapp:1.2.3
-    ```
+        # compose1.yml
+        services:
+          web:
+            image: myapp:1.2.3
+        ```
     - **maps/dictionnaries: merging is done key-by-key** (union of keys in
         `compose1` and `compose2`, and where there is conflict, values from
         `compose2` prevails
-    ```yaml
-    # in the final config: `DEBUG: false, LOG_LEVEL: info`
+        ```yaml
+        # in the final config: `DEBUG: false, LOG_LEVEL: info`
 
-    # compose1.yml
-    environment:
-      DEBUG: "true"
-      LOG_LEVEL: "info"
+        # compose1.yml
+        environment:
+          DEBUG: "true"
+          LOG_LEVEL: "info"
 
-    # compose2.yml
-    environment:
-      DEBUG: "false"
-  ```
+        # compose2.yml
+        environment:
+          DEBUG: "false"
+      ```
   - **lists: values are appended** (except for some fields where values are
       replaced instead).
 
