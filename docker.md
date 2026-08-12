@@ -19,8 +19,6 @@ see:
 
 # docker commands
 
----
-
 ## `build`
 
 ### command
@@ -51,8 +49,6 @@ usually, the build context is a **filesystem context** (local directory, tar fil
 - the build context is **the set of files that the builder can access during the build**. 
 - build instructions such as `COPY` and `ADD` can refer to any of the files and directories **in the context**.
 
----
-
 ## `run`
 
 ```bash
@@ -65,8 +61,6 @@ for example:
 
 ```
 
----
-
 ## `images`: list all images
 
 ```bash
@@ -74,8 +68,6 @@ docker images
 ```
 
 list all docker images. an image is created after running `docker build`
-
----
 
 ## `ps` and `ls`: list containers
 
@@ -93,8 +85,6 @@ see: https://stackoverflow.com/a/16842203
 ---
 
 # dockerfile instructions / syntax
-
----
 
 ## `RUN`
 
@@ -121,8 +111,6 @@ to have results of a command outputted to `stdout`, you need to run your dockerf
 
 see: https://stackoverflow.com/a/67548336
 
----
-
 ## `CMD`
 
 ```bash
@@ -138,8 +126,6 @@ CMD ["param1","param2"]
 - **it doesn't execute at build time**: use `docker run` to run a container
 - you should **combine it with `ENTRYPOINT`**, to pass arguments and options to the `ENTRYPOINT` script.
 
----
-
 ## `COPY`
 
 ```bash
@@ -149,8 +135,6 @@ COPY <src> <dst>
 where:
 - `<src>` is the **relative path from the build context or an absolute path**
 - `<dst>` is the **destination file in the docker**. if it's a relative path, it depends on your `WORKDIR`.
-
----
 
 ## `WORKDIR`
 
@@ -166,8 +150,6 @@ RUN echo "Hello world !" > hello.txt
 WORKDIR /
 ```
 
----
-
 ## `ENV`
 
 ```bash
@@ -175,8 +157,6 @@ ENV <var_name>=<value>
 ```
 
 defines an env variable for that docker image.
-
----
 
 ## `ARG`
 
@@ -190,8 +170,6 @@ defines a variable that users can define at build time. should be on top of the 
 ```bash
 docker build --build-arg <varname>=<value>
 ```
-
----
 
 ## `FROM`
 
@@ -209,12 +187,9 @@ FROM busybox:$VERSION
 ARG VERSION
 RUN echo $VERSION > image_version
 ```
-
 ---
 
 # docker-compose instructions / syntax
-
----
 
 ## environment management
 
@@ -280,11 +255,7 @@ you can make env variables accessible to a docker-compose:
     docker-compose up
     ```
 
----
-
 ## multiple `compose` files
-
----
 
 ## docker compose profiles
 
@@ -292,9 +263,7 @@ see: https://docs.docker.com/compose/how-tos/profiles/
 
 profiles let you **selectively start services** in a compose file, instead of always starting all of them with `docker compose up`.
 
----
-
-## defining a profile
+### defining a profile
 
 ```yaml
 services:
@@ -354,8 +323,6 @@ this starts `debug-tools` (and its dependencies) **regardless of active profiles
 - profiles are useful to separate **optional tooling** (debug containers, seed scripts, backup jobs, ...) from the **core services** that should always run.
 - `docker compose config --profiles` lists all profiles found in a compose file.
 - `docker compose config --services` lists services that **would be started** given the currently active profiles.
-
----
 
 ## volumes
 
