@@ -274,11 +274,51 @@ a base config is extended or overridden by other configs.
     docker compose -f compose.yml -f compose.prod.yml up
     ```
 
-**order of files** is important: configs in the later files override configs in
-the earlier files.
-
 ### how docker handles merging
 
+**order of files** is important: files are merged left to right, with rightmost
+configs overriding earlier configs.
+
+given `COMPOSE_FILE=compose1.yml:compose2.yml`, 
+- docker-compose does a **union of both configs**:
+    - entries present in `compose1.yml` but not in `compose2.yml` are present
+        in the final config
+    - entries present in `compose2.yml` but not in `compose1.yml` are appended
+        to the final config
+- conficts are resolved using a **deep merge strategy**: the yaml trees are
+    traversed and replacements are only done where a conflict occurs.
+- **replacement of values depend on field type**:
+    - **scalar values: last one wins**
+    ```yaml
+    # `myapp.1.2.3` is kept in the final config
+
+    # compose2.yml
+        services:
+          web:
+        image: myapp:latest
+
+    # compose1.yml
+    services:
+      web:
+        image: myapp:1.2.3
+    ```
+    - **maps/dictionnaries: merging is done key-by-key** (union of keys in
+        `compose1` and `compose2`, and where there is conflict, values from
+        `compose2` prevails
+    ```yaml
+    # in the final config: `DEBUG: false, LOG_LEVEL: info`
+
+    # compose1.yml
+    environment:
+      DEBUG: "true"
+      LOG_LEVEL: "info"
+
+    # compose2.yml
+    environment:
+      DEBUG: "false"
+  ```
+  - **lists: values are appended** (except for some fields where values are
+      replaced instead).
 
 
 ## docker compose profiles
