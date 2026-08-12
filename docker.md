@@ -257,6 +257,30 @@ you can make env variables accessible to a docker-compose:
 
 ## multiple `compose` files
 
+in docker-compose, you can merge together multiple docker-compose files so that
+a base config is extended or overridden by other configs.
+
+### specify the `compose` files
+
+1. using `COMPOSE_FILE`: 
+    ```bash
+    COMPOSE_FILE=compose.yml:compose.prod.yml
+    ```
+    - note that `:` is the default separator on macOS/linux. on windows, separator is `;`
+    - a custom separator can be set with the `COMPOSE_PATH_SEPARATOR` env
+        variable
+2. using `-f` in the command line:
+    ```bash
+    docker compose -f compose.yml -f compose.prod.yml up
+    ```
+
+**order of files** is important: configs in the later files override configs in
+the earlier files.
+
+### how docker handles merging
+
+
+
 ## docker compose profiles
 
 see: https://docs.docker.com/compose/how-tos/profiles/
