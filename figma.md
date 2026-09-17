@@ -4,12 +4,17 @@
 
 [cheat sheet](https://www.figma.com/community/file/1340996401619015960/figma-cheat-sheet-essential-keyboard-shortcuts)
 
+- `p`: switch to pen (useful to draw vectors
+- `r`: rectangle
+- `t`: text
+- `ctrl` in pen mode: switch to bend (useful to edit bezier curvers)
+
 - `alt + drag`: duplicate (copy and drag)
 - `shift + click`: multi-select
 - `ctrl + maj + c` / `ctrl + maj + v`: copy/paste style
 
 - `ctrl + g`: group
-- `ctrl + up + g`: ungroup
+- `ctrl + maj + g`: ungroup
 - `ctrl + up + l` : lock
 
 - `shift + h`: flip horizontally
