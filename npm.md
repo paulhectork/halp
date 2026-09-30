@@ -1,21 +1,50 @@
 # Publish a library on NPM and set it up
 
-## Publish an NPM package (jan. 2026)
+---
 
-Since the end of 2025, to publish, you need to either enable 2FA or to have an access token with "bypass 2FA" enabled.
+## Publish an NPM package with 2FA (sept. 2027)
 
-1. Create an access token with Read/Write permissions on your package and "bypass 2FA" enabled: `Account/Access tokens`
-2. Update your NPM config with an access token: 
-    ```bash
-    export NPM_TOKEN="YOUR_TOKEN"
-    npm config set //registry.npmjs.org/:_authToken "${NPM_TOKEN}"
-    ```
-3. Publish your package
-    ```bash
-    npm publish
-    ```
+### The problem
 
-It is also possible to update your `.npmrc` file.
+NPM chose to make my life more difficult by deprecating "bypass 2FA" tokens AND TOTP 2FA (2FA through an external app, i.e. a phone) (.....). Your only option to publish a package is to **enable 2FA on your NPM account with another method than TOTP**. Possible methods are biometric identification, hardware key or using bitwarden.
+
+### 1. Enable 2FA on NPM with Bitwarden
+
+**You will need**:
+- a Bitwarden account (free tier is ok)
+- Google Chrome
+- the Bitwarden Google Chrome extension
+
+**The process**
+- login to [npmjs.org](npmjs.org) on Google Chrome
+- go to your NPM account settings (`https://www.npmjs.com/settings/your-user-name/tfa/`) and click "Enable 2FA"
+- select "Create a new security key"
+- name the key (i.e., `npm`)
+- a Bitwarden popup will open. Follow the steps to create a new passkey
+
+### 2. Create a 2FA token on NPM
+
+**The process**
+- still use Google Chrome with the Bitwarden extension
+- go to the tokens page (`[/your-user-name](https://www.npmjs.com/settings/your-user-name/tokens/granular-access-tokens/new)`)
+- create a token with 2FA disabled and Read/Write permissions
+- you will be prompted for 2FA authentication, follow instructions
+
+### 3. Publish your package
+
+In the terminal,
+
+```bash
+npm publish
+```
+
+You will be asked to:
+- login
+- authentify with 2FA
+
+**Do both in Google Chrome with the Bitwarden extension**. 
+
+---
 
 ## Publish with an NPM package with MongDB
 
