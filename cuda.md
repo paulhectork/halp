@@ -117,7 +117,7 @@ sudo reboot
 nvidia-smi
 ```
 
-NOTES:
-- the installed driver must match your GPU model
-- if `Secure Boot` is enabled on your Ubuntu, you **must** install the drivers through `ubuntu-drivers` (not by downloading and building it yourself): 
+**Notes**:
+- the installed driver must **match your GPU model**
+- **if `Secure Boot` is enabled on your Ubuntu**, you must install the drivers through `ubuntu-drivers` (not by downloading and building it yourself): 
     Canonical’s prebuilt modules are signed, but other builds will be blocked by the secure boot.
