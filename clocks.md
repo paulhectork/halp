@@ -55,6 +55,20 @@ worth noting:
 - `System clock synchronized`: shows if the system clock is synced to a remote
     server using the NTP protocol.
 
+### set time manually
+
+```bash
+# disable auto-synchronization
+sudo timedatectl set-ntp false
+# set local time (in yr own timezone)
+sudo timedatectl set-time "YYYY-MM-SS HH:MM:SS"
+# set rtc to system clock
+sudo hwclock --systohc
+# check
+sudo timedatectl
+sudo hwclock
+```
+
 ### other commands
 
 - manage `timesyncd` using basic `systemctl` commands:
