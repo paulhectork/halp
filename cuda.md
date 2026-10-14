@@ -121,3 +121,4 @@ nvidia-smi
 - the installed driver must **match your GPU model**
 - **if `Secure Boot` is enabled on your Ubuntu**, you must install the drivers through `ubuntu-drivers` (not by downloading and building it yourself): 
     Canonical’s prebuilt modules are signed, but other builds will be blocked by the secure boot.
+- the Nvidia drivers installed **must match your Linux compiler version** (you can get it with `uname -r`)
