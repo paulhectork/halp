@@ -12,6 +12,8 @@ a list of available variables is available [in the official docs](https://bulma.
 
 a summary of bulma v1 CSS variables
 
+[the official docs](https://bulma.io/documentation/customize/concepts/#global-css-variables) also have a list of CSS variables.
+
 ### backgrounds and text
 
 - `--bulma-scheme-main`: page background
