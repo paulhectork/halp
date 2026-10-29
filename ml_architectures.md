@@ -13,9 +13,11 @@ RANSAC (Random Sample Consensus) is an **iterative algorithm for robust model fi
 It takes as an input:
 - **$M(P)$**, a mathematical model $M$ taking a set of parameters $P$ that needs to be adjusted.
 - **$S$**, a set of observed data points
-- **$m$**, the minimal number of points needed to fit $M(P)$ (e.g. $m=2$ for a line: we need 2 data points to form a line, $m=4$ for a homography)
-- **$t$**, an inlier threshold: a point $x$ is an inlier if $\text{residual}(x, M(P_i)) < t$ ($\text{residual}$ measures how distant $x$ is from being consistent with model $M(P)$ )
 - **$k$**, the number of iterations
+- **$m$**, the minimal number of points needed to fit $M(P)$
+  - (e.g. $m=2$ for a line: we need 2 data points to form a line, $m=4$ for a homography)
+- **$t$**, an inlier threshold
+  - a point $x$ is an inlier if $\text{residual}(x, M(P_i)) < t$ ($\text{residual}$ measures how distant $x$ is from being consistent with model $M(P)$ )
 
 $S$ contains both *inliers* (points whose distribution can be explained by $M(P)$) and *outliers* (points that don't fit this model).
 
