@@ -1,4 +1,4 @@
-# ML ALGORITHMS AND ARCHITECTURES
+# ML METHODS: ALGORITHMS AND ARCHITECTURES
 
 mahine learning algorithms and architectures
 
