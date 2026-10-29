@@ -1,6 +1,51 @@
 # ML ARCHITECTURES
 
---- 
+mahine learning algorithms and architectures
+
+---
+
+## RANSAC
+
+### General description
+
+RANSAC (Random Sample Consensus) is an **iterative algorithm for robust model fitting**: it estimates the parameters of a model from data containing outliers, and as a by-product labels each data point as an inlier or an outlier. (It is not an architecture.)
+
+It takes as an input:
+- $M(P)$, a mathematical model $M$ taking a set of parameters $P$ that needs to be adjusted.
+- $S$, a set of observed data points
+- $m$, the minimal number of points needed to fit $M(P)$ (e.g. $m=2$ for a line: we need 2 data points to form a line, $m=4$ for a homography)
+- $t$, an inlier threshold: a point $x$ is an inlier if $\text{residual}(x, M(P_i)) < t$ ($\text{residual}$ measures how distant $x$ is from being consistent with model $M(P)$)
+- $k$, the number of iterations
+
+$S$ contains both *inliers* (points whose distribution can be explained by $M(P)$) and *outliers* (points that don't fit this model).
+
+**The goal is to**:
+- **find the parameters $P^*$** that fit the largest number of points in $S$
+- **define the consensus set $C^*$$**, containing all *inliers*.
+
+### Algorithm
+
+The algorithm is run a fixed number of iterations.
+
+During the execution, $P^*$ and $C^*$ describe the best params and consensus set **so far**.
+
+**At each iteration $i = 1, \dots, k$**:
+- randomly sample a minimal subset $s_i \subset S$ with $|s_i| = m$ ($s_i$ is of size $m$)
+- estimate a **new** set of parameters $P_i$ from $s_i$ alone, creating a new hypothesis $M(P_i)$
+- compute the consensus set $C_i = \{x \in S : \text{residual}(x, M(P_i)) < t\}$
+  - the consensus set is the set of the points that $M(P_i)$ considers inliers
+  - the $residual$ computes how far a data point $x$ is rom being consistent with $M(P_i)$.
+- if $|C_i| > |C^*|$ (consensus set for $i$ is larger than the consensus set of the current best model), **replace the best model**:
+  - $P^* \leftarrow P_i$$: $P_i$ becomes the new best params $P^*$
+  - $C^* \leftarrow C_i$: $C_i$ becomes the new consensus set $C^*$
+- otherwise, discard $M(P_i)$
+
+**After the last iteration**:
+- optionally refit $P^*$ on all points in $C^*$ (e.g. by least squares) to refine the estimate
+- label the points in $C^*$ as inliers and the rest of $S$ as outliers
+
+### In computer vision
+
 ---
 
 ## Transformer Architecture: Detailed Overview
@@ -34,8 +79,8 @@
 
 A transformer model is built by stacking multiple identical blocks, each composed of two main steps:
 
-1. **Multi-Head Self-Attention Layer** – the "learning" or "information gathering" phase  
-2. **Feed-Forward Neural Network (FFN)** – the "decision" or "processing" phase  
+1. **Multi-Head Self-Attention Layer** – the "learning" or "information gathering" phase
+2. **Feed-Forward Neural Network (FFN)** – the "decision" or "processing" phase
 
 These steps are wrapped with residual connections and layer normalization for stability and improved learning.
 
@@ -43,55 +88,55 @@ These steps are wrapped with residual connections and layer normalization for st
 
 ### Step 1: Multi-Head Self-Attention Layer ("Learning Phase")
 
-- **Purpose:**  
+- **Purpose:**
   Enables each position in the input sequence to "look at" (attend to) every other position and gather relevant information, regardless of their distance in the sequence.
 
-- **Detailed Process:**  
-  1. **Linear Projections:**  
+- **Detailed Process:**
+  1. **Linear Projections:**
      - Each input token embedding is linearly transformed into three vectors: Query (Q), Key (K), and Value (V).
-  2. **Attention Score Computation:**  
+  2. **Attention Score Computation:**
      - For each token, compute the similarity between its Query and the Keys of all tokens (including itself) using dot products, yielding a score matrix.
-  3. **Scaling and Softmax:**  
+  3. **Scaling and Softmax:**
      - The scores are divided by the square root of the dimension size (for stability), then passed through a softmax function to obtain normalized attention weights.
-  4. **Weighted Sum:**  
+  4. **Weighted Sum:**
      - Each token's output is computed as a weighted sum of all Value vectors, using the attention weights.
-  5. **Multiple Heads:**  
+  5. **Multiple Heads:**
      - The process is done in parallel with multiple "heads," each with its own Q, K, V projections, allowing the model to focus on different relationships or features.
-  6. **Concatenation and Projection:**  
+  6. **Concatenation and Projection:**
      - Outputs from all heads are concatenated and passed through a final linear projection to produce the attention output.
 
-- **Metaphor:**  
+- **Metaphor:**
   Like a student reading a textbook, looking back and forth over the entire content to collect every relevant fact, clue, or relationship before making a conclusion.
 
 ---
 
 ### Step 2: Feed-Forward Neural Network (FFN) ("Decision Phase")
 
-- **Purpose:**  
+- **Purpose:**
   Processes the gathered information at each position independently to make local decisions or transformations.
 
-- **Detailed Process:**  
-  1. **First Linear Transformation:**  
+- **Detailed Process:**
+  1. **First Linear Transformation:**
      - The output from the attention layer at each position is passed through a fully connected (dense) layer, typically expanding the dimensionality (hidden size increases).
-  2. **Non-Linearity:**  
+  2. **Non-Linearity:**
      - A non-linear activation function (usually ReLU or GELU) is applied, introducing the capacity to model complex relationships.
-  3. **Second Linear Transformation:**  
+  3. **Second Linear Transformation:**
      - The activated values are passed through another dense layer, reducing the dimensionality back to the original embedding size.
-  4. **Position-wise Operation:**  
+  4. **Position-wise Operation:**
      - This process occurs independently for every token position—no interaction between positions at this stage.
 
-- **Metaphor:**  
+- **Metaphor:**
   Like a student, after reading and gathering facts, pausing to reflect deeply on each section separately and making a decision or interpretation for that part.
 
 ---
 
 ### Residual Connections & Layer Normalization
 
-- **Residual Connections:**  
-  - The input to each sublayer (attention or FFN) is added to its output before normalization.  
+- **Residual Connections:**
+  - The input to each sublayer (attention or FFN) is added to its output before normalization.
   - This helps preserve the original information and allows gradients to flow more easily during training, addressing the "vanishing gradient" problem in deep models.
 
-- **Layer Normalization (LayerNorm):**  
+- **Layer Normalization (LayerNorm):**
   - Applied **after** each residual addition.
   - Standardizes the summed output (input + sublayer output) for each token independently by:
     - Subtracting the mean and dividing by the standard deviation of the features for that token.
@@ -111,10 +156,10 @@ These steps are wrapped with residual connections and layer normalization for st
 ### Processing Flow
 
 1. **Input Embeddings** (with positional encodings)
-2. → **Multi-Head Self-Attention Layer**  
+2. → **Multi-Head Self-Attention Layer**
    - All-to-all information gathering, parallelized over multiple heads.
 3. → **Add & Layer Normalization**
-4. → **Feed-Forward Network**  
+4. → **Feed-Forward Network**
    - Local, position-wise transformation (“decision” at each position).
 5. → **Add & Layer Normalization**
 6. (Repeat steps 2–5 for N layers)
@@ -149,14 +194,14 @@ These steps are wrapped with residual connections and layer normalization for st
 
 ### Key Concepts Recap
 
-- **Multi-Head Attention:**  
+- **Multi-Head Attention:**
   Parallel “learning” – each head gathers different information from the sequence.
-- **Feed-Forward Network:**  
+- **Feed-Forward Network:**
   Independent “decision” at each position, transforming each token’s representation.
-- **Residuals & LayerNorm:**  
+- **Residuals & LayerNorm:**
   - Residuals keep original and learned information blended.
   - LayerNorm stabilizes and standardizes feature distributions at every step, enabling deep stacking.
-- **Stacking:**  
+- **Stacking:**
   Layering these blocks enables complex, hierarchical pattern learning.
 
 ---
@@ -191,8 +236,8 @@ These steps are wrapped with residual connections and layer normalization for st
 
 DINO (Self-Distillation with No Labels) is a self-supervised learning method for vision transformers (ViTs) and convolutional networks. Its architecture consists of two main networks:
 
-1. **Student Network**  
-2. **Teacher Network**  
+1. **Student Network**
+2. **Teacher Network**
 
 Both usually share the same architecture (typically a Vision Transformer), but have different parameters during training.
 
@@ -200,36 +245,36 @@ Both usually share the same architecture (typically a Vision Transformer), but h
 
 ### Step 1: Student and Teacher Networks
 
-- **Purpose:**  
+- **Purpose:**
   Train a neural network (student) to produce similar representations as another network (teacher), without using any labels.
 
-- **Detailed Process:**  
-  1. **Input Augmentation:**  
+- **Detailed Process:**
+  1. **Input Augmentation:**
       - An image is augmented multiple times (different crops, color jittering, etc.) to produce several "views".
-  2. **Parallel Processing:**  
+  2. **Parallel Processing:**
       - Both student and teacher networks process these different views of the same image.
-  3. **Representation Extraction:**  
+  3. **Representation Extraction:**
       - Each network outputs a vector representation for each view.
-  4. **Consistency Loss:**  
+  4. **Consistency Loss:**
       - The student learns by minimizing the difference between its outputs and the teacher's outputs for corresponding views. The teacher's weights are updated as an exponential moving average (EMA) of the student's weights (not by direct backpropagation).
 
-- **Metaphor:**  
+- **Metaphor:**
   Like a student trying to mimic the answers of a teacher who is always a little ahead, using only what they both "see"—no answer key provided.
 
 ---
 
 ### Step 2: Vision Transformer Encoder Block
 
-- **Purpose:**  
+- **Purpose:**
   Both student and teacher typically use a Vision Transformer (ViT) as their core encoder.
-- **How it works:**  
-  1. **Patch Embedding:**  
+- **How it works:**
+  1. **Patch Embedding:**
       - The image is split into patches, each patch is linearly embedded into a token.
-  2. **Positional Encoding:**  
+  2. **Positional Encoding:**
       - Positional information is added to each token.
-  3. **Transformer Layers:**  
+  3. **Transformer Layers:**
       - Multiple layers of multi-head self-attention and feed-forward networks process the tokens (see transformer architecture for details).
-  4. **Projection Head:**  
+  4. **Projection Head:**
       - The output is passed through a projection head (MLP) to produce the final representation used for the self-supervised loss.
 
 ---
@@ -242,12 +287,12 @@ Both usually share the same architecture (typically a Vision Transformer), but h
 
 ### Processing Flow
 
-1. **Input Image**  
-2. → **Multiple Augmented Views**  
-3. → **Patch Embedding & Positional Encoding** (for each view)  
-4. → **Transformer Encoder (Student & Teacher)**  
-5. → **Projection Head (MLP for each network)**  
-6. → **Self-Distillation Loss: Student mimics Teacher's output**  
+1. **Input Image**
+2. → **Multiple Augmented Views**
+3. → **Patch Embedding & Positional Encoding** (for each view)
+4. → **Transformer Encoder (Student & Teacher)**
+5. → **Projection Head (MLP for each network)**
+6. → **Self-Distillation Loss: Student mimics Teacher's output**
 7. **Teacher's weights updated via EMA of Student's weights**
 
 ---
@@ -273,13 +318,13 @@ Both usually share the same architecture (typically a Vision Transformer), but h
 
 ### Key Concepts Recap
 
-- **Self-Distillation:**  
+- **Self-Distillation:**
   Student learns from teacher, no ground-truth labels needed.
-- **EMA Update:**  
+- **EMA Update:**
   Teacher is a moving average of the student.
-- **Vision Transformer Backbone:**  
+- **Vision Transformer Backbone:**
   Both networks use ViT blocks with residuals and normalization.
-- **Augmented Views:**  
+- **Augmented Views:**
   Learning is driven by consistency across multiple views of the same image.
 
 ---
