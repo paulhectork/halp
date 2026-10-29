@@ -52,10 +52,10 @@ Linear algebra works on vector spaces and linear transforms.
 - $$\Pi$$ `\Pi`: product
 - $$\otimes$$ `\otimes`: tensor product of 2 vectors or matrices
 - $$\oplus$$ `\oplus`: direct sum of 2 vectors or matrices
-- $$M^{T}$$ `M^{T}`: transposition
-- $$X \times Y$$ `X \times Y`, with $$X$$ and $$Y$$ vector spaces, is the **cartesian product** of $$X$$ with $$Y$$
+- $$M^{T}$$: transposition
+- $$X \times Y$$, with $$X$$ and $$Y$$ vector spaces, is the **cartesian product** of $$X$$ with $$Y$$
 - $$||X||$$: norm of a vector space. The "norm" is equivalent to the notion of "length"
-    - $$||y - x||$$ `||y - x||` is the distance between 2 vectors $$y$$ and $$x$$.
+    - $$||y - x||$$ is the distance between 2 vectors $$y$$ and $$x$$.
 - $$\mathbb{R}^{n}$$: defines a vector space of dimension $$n$$. $$n$$ being a positive integer, all vectors belonging to $$\mathbb{R}^{n}$$ are of size $$n$$.
     - $$x \in \mathbb{R}^{2}$$ => $$x = (1,2)$$
     - $$x \in \mathbb{R}^{3}$$ => $$x = (1,2,3)$$
