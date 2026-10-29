@@ -38,8 +38,8 @@ During the execution, $P^*$ and $C^*$ describe the best params and consensus set
   - the consensus set is the set of the points that $M(P_i)$ considers inliers
   - the $residual$ computes how far a data point $x$ is rom being consistent with $M(P_i)$.
 - **replace the best model** if $|C_i| > |C^*|$ (consensus set for $i$ is larger than the consensus set of the current best model):
-  - $P^* \leftarrow P_i$: $P_i$ becomes the new best params $P^*$
-  - $C^* \leftarrow C_i$: $C_i$ becomes the new consensus set $C^*$
+  - $P^* \leftarrow P_i$ ( $P_i$ becomes the new best params $P^*$ )
+  - $C^* \leftarrow C_i$ ( $C_i$ becomes the new consensus set $C^*$ )
 - **otherwise, discard** $M(P_i)$
 
 **After the last iteration**:
