@@ -69,9 +69,17 @@ Among a set of images $S = \{A, B, \dots \}$, extract for each image a set of ke
 
 #### 3. `RANSAC` feature matching
 
-RANSAC is used for **geometry filtering**: since we are working on images, correct matches should **agree with geometric transformations**. In other words, there must be a geometry transformation that allows to translate the set of keypoints in $A$ to the set of keypoints in $B$.
+RANSAC is used for **geometry filtering**: since we are working on images, correct matches should **agree with a geometric transformation**. Given the matched keypoints $I$ in $A$ and their partners $J$ in $B$, there should be a transformation $T$ that maps each $i \in I$ to its partner $j \in J$:
 
 $$I \times T = J$$
+
+RANSAC estimates $T$ from the matches, then keeps the matches that agree with it:
+- a match $(i, j)$ is an inlier if its residual under $T$ is below the threshold $t$
+- a match that does not agree with $T$ is an outlier and is dropped
+
+**What is $T$ ?**
+- in 2D, a translation / scale / rotation / affine transform / homography
+- in 3D, a fundamental matrix $F$
 
 ---
 
