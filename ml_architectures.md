@@ -11,17 +11,17 @@ mahine learning algorithms and architectures
 RANSAC (Random Sample Consensus) is an **iterative algorithm for robust model fitting**: it estimates the parameters of a model from data containing outliers, and as a by-product labels each data point as an inlier or an outlier. (It is not an architecture.)
 
 It takes as an input:
-- $M(P)$, a mathematical model $M$ taking a set of parameters $P$ that needs to be adjusted.
-- $S$, a set of observed data points
-- $m$, the minimal number of points needed to fit $M(P)$ (e.g. $m=2$ for a line: we need 2 data points to form a line, $m=4$ for a homography)
-- $t$, an inlier threshold: a point $x$ is an inlier if $\text{residual}(x, M(P_i)) < t$ ($\text{residual}$ measures how distant $x$ is from being consistent with model $M(P)$)
-- $k$, the number of iterations
+- **$M(P)$**, a mathematical model $M$ taking a set of parameters $P$ that needs to be adjusted.
+- **$S$**, a set of observed data points
+- **$m$**, the minimal number of points needed to fit $M(P)$ (e.g. $m=2$ for a line: we need 2 data points to form a line, $m=4$ for a homography)
+- **$t$**, an inlier threshold: a point $x$ is an inlier if $\text{residual}(x, M(P_i)) < t$ ($\text{residual}$ measures how distant $x$ is from being consistent with model $M(P)$ )
+- **$k$**, the number of iterations
 
 $S$ contains both *inliers* (points whose distribution can be explained by $M(P)$) and *outliers* (points that don't fit this model).
 
 **The goal is to**:
 - **find the parameters $P^*$** that fit the largest number of points in $S$
-- **define the consensus set $C^*$$**, containing all *inliers*.
+- **define the consensus set $C^*$**, containing all *inliers*.
 
 ### Algorithm
 
@@ -30,9 +30,9 @@ The algorithm is run a fixed number of iterations.
 During the execution, $P^*$ and $C^*$ describe the best params and consensus set **so far**.
 
 **At each iteration $i = 1, \dots, k$**:
-- randomly sample a minimal subset $s_i \subset S$ with $|s_i| = m$ ($s_i$ is of size $m$)
-- estimate a **new** set of parameters $P_i$ from $s_i$ alone, creating a new hypothesis $M(P_i)$
-- compute the consensus set $C_i = \{x \in S : \text{residual}(x, M(P_i)) < t\}$
+- **randomly sample** a minimal subset $s_i \subset S$ with $|s_i| = m$ ($s_i$ is of size $m$)
+- **estimate a new set of parameters** $P_i$ from $s_i$ alone, creating a new hypothesis $M(P_i)$
+- **compute a new consensus set** $C_i = \{x \in S : \text{residual}(x, M(P_i)) < t\}$
   - the consensus set is the set of the points that $M(P_i)$ considers inliers
   - the $residual$ computes how far a data point $x$ is rom being consistent with $M(P_i)$.
 - if $|C_i| > |C^*|$ (consensus set for $i$ is larger than the consensus set of the current best model), **replace the best model**:
