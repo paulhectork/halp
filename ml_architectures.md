@@ -29,7 +29,7 @@ $$f = (x, y,\sigma, \theta, d)$$
   - with 8 orientation bins ber cell
   - $\rightarrow 4 \times 4 \times 8 = 128$
 
-$x, y, \sigma, \theta$ describe where, at what scale and at what orientation the keypoint was found.  $d$ describes the local appearence of the keypoint.
+**$x, y, \sigma, \theta$ describe** where, at what scale and at what orientation the keypoint was found.  **$d$ describes the local appearence** of the keypoint.
 - **keypoint matching** uses only $d$
 - **RANSAC** uses only $(x,y)$ (it only compares the geometry of keypoints).
 
