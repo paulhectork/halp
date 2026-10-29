@@ -54,13 +54,13 @@ The pipeline is: `SIFT -> descriptor maching -> RANSAC`
 
 1. `SIFT` **feature extraction**: among a set of images $S = \{A, B, \dots \}$, extract for each image a set of keypoints. Each keypoint has a 128-dimensional descriptor ( $d_A$  for image $A$ ).
 2. **descriptor matching**:
-  - for each keypoint $i$ in image $A$ (with descriptor $d_A^(i)$ )
+  - for each keypoint $i$ in image $A$ (with descriptor $d_A^{(i)}$ )
     - compute distance to every descriptor $d_B^(j)$ in $B$ (descriptors for each keypoint $j$ in $B$):
     - keep the nearest distances $d_1$ and $d_2$ (corresponding to the 2 closest descriptors in $B$:
-      - $d_1$ is the distance between $d_A^(i)$ and $d_B^{(j_1)}$
-      - $d_2$ is the distance between $d_A^(i)$ and $d_B^{(j_2)}$
+      - $d_1$ is the distance between $d_A^{(i)}$ and $d_B^{(j_1)}$
+      - $d_2$ is the distance between $d_A^{(i)}$ and $d_B^{(j_2)}$
     - if $\frac{d_1}{d_2} \lt 0.75$ , the match is trustworthy:
-      - descriptors $d_A^(i)$ $d_B^(j_1)$ matched,
+      - descriptors $d_A^{(i)}$ $d_B^{(j_1)}$ matched,
       - so **$i$ and $j$ are matched keypoints**.
   - **output is a set $\{(i, j)\}$** of matched keypoints between $A$ and $B$.
 
