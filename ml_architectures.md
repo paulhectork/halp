@@ -1,10 +1,41 @@
-# ML ARCHITECTURES
+# ML ALGORITHMS AND ARCHITECTURES
 
 mahine learning algorithms and architectures
 
 ---
 
-## RANSAC
+## Feature extraction: SIFT
+
+### General description
+
+Feature extraction aims to identify important points in an image to provide a "feature description" of the image's content. Those features can then be used to find the same object in different images.
+
+A SIFT feature is:
+- **invariant to**: scale and rotation (don't affect the features)
+- **robust to**: lighting, affine distorsion, noise (don't affect the features too much)
+
+### SIFT features
+
+A SIFT feature is a tuple:
+
+$$f = (x, y,\sigma, \theda, d)$$
+
+- $(x,y) \in \mathbb{R}^2$ is the keypoint's location in the image, in pixel coordinates
+- $\sigma \in \mathbb{R}_{\lt 0}$ is the scale at which the keypoint was detected (i.e., "difference of gaussian extremum")
+- $\theta in \[0,2\pi)$ is the dominant gradiant orientation of the keypoint. It makes the descriptor rotation invariant.
+- $d \in R{128}$ is the feature descriptor: a 1D vector containing 128 real numbers. It is obtained by:
+  - taking a $4 \times 4$ grid around $(x,y)$
+  - scaling them by $\sigma$
+  - with 8 orientation bins ber cell
+  - $\rightarrow 4 \times 4 \times 8 = 128$
+
+$x, y \sigma, \theta$ describe where, at what scale and at what orientation the keypoint was found.  $d$ describes the local appearence of the keypoint.
+- **keypoint matching** uses only $d$
+- **RANSAC** uses only $(x,y)$ (it only compares the geometry of keypoints).
+
+---
+
+## Feature matching: RANSAC
 
 ### General description
 
