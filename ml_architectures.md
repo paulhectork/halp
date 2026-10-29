@@ -67,9 +67,11 @@ Among a set of images $S = \{A, B, \dots \}$, extract for each image a set of ke
     - so **$i$ and $j$ are matched keypoints**.
 - output is a **set $\\{(i, j)\\}$ of all matched keypoints between $A$ and $B$**.
 
-#### 3. `RANSAC` feature matching**
+#### 3. `RANSAC` feature matching
 
+RANSAC is used for **geometry filtering**: since we are working on images, correct matches should **agree with geometric transformations**. In other words, there must be a geometry transformation that allows to translate the set of keypoints in $A$ to the set of keypoints in $B$.
 
+$$I \matmul T \eq J$$
 
 ---
 
