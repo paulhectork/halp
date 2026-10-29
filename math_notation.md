@@ -39,7 +39,7 @@
 **Other**
 
 - $$\emptyset$$ `\emptyset`: empty set
-- `#X` or $$|X|$$ `|X|`: number of elements of set $$X$$
+- $$#X$$ or $$|X|$$: number of elements of set $$X$$
 - $$\mathbb{R}^{n}$$ `\mathbb{R}^{n}`: all $$n$$-uples whose members belong to $$\mathbb{R}$$. See `linear algebra`.
 
 ---
