@@ -22,7 +22,7 @@ It takes as an input:
 $S$ contains both *inliers* (points whose distribution can be explained by $M(P)$ ) and *outliers* (points that don't fit this model).
 
 **The goal is to**:
-- **find the parameters $P^*$** that fit the largest number of points in $S$
+- **find the parameters** $P^*$ that fit the largest number of points in $S$
 - **define the consensus set $C^*$**, containing all *inliers*.
 
 ### Algorithm
