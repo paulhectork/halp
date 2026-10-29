@@ -6,6 +6,8 @@ mahine learning algorithms and architectures
 
 ## Feature extraction: SIFT
 
+**SIFT is an algorithm, not an architecture**.
+
 ### General description
 
 Feature extraction aims to identify important points in an image to provide a "feature description" of the image's content. Those features can then be used to find the same object in different images.
@@ -32,6 +34,64 @@ $$f = (x, y,\sigma, \theta, d)$$
 **$x, y, \sigma, \theta$ describe** where, at what scale and at what orientation the keypoint was found.  **$d$ describes the local appearence** of the keypoint.
 - **keypoint matching** uses only $d$
 - **RANSAC** uses only $(x,y)$ (it only compares the geometry of keypoints).
+
+### Stages
+
+The goal is to transform an image into large collection of feature vectors as described above.
+
+#### 1. Scale-space extrema detection
+
+To detect scale-invariant features, we blur the image at increasing scales, and then select candates which are extrema of their neighbouring pixelson the same image, and on less and more blured images.
+
+In more detail,
+
+1. **gaussian blurring.** within each octave (a copy of the image downsampled by 2), the image is blurred with Gaussian filters of increasing scale $\sigma, k\sigma, k^2\sigma, \dots$, producing a stack of blurred images.
+2. **Difference-of-Gaussians (DoG).**
+  - adjacent blurred images are **subtracted** (a blurred image is subtracted from the next-less-blurred image)
+  - we get **a DoG stack**: stack of images at different scales
+  - in a DoG stack, **each image keeps the details at one range of scales**,
+    - since the subtraction removes both the smooth background and the finest noise.
+    - DoG substration produces band-pass representation of the image in which **structure of the image at a given scale** stands out. Indeed, DoG removes:
+      - high-fequency spacial information (details, where pixel values change rapidly over short distances)
+      - low-fequency spacial information (background, where pixel values are uniform)
+3. **features extracted are local extrema**:
+  - each pixel $(x, y)$ in a DoG image at scale $\sigma$ has 26 neighbors:
+    - 8 pixels in the same DoG image
+    - 9 pixels in the DoG image just below in scale
+    - 9 pixels in the DoG image just above in scale
+  - **the pixel is a candidate keypoint  if it is an extrema of its neighbourhood**:
+    - if a pixel is an extrema of the 9 pixels in the image it belongs to, then it stands out.
+    - if a pixel is an extrema of the other 18 pixels on the images $\sigma+1$ and $\sigma-1$
+    - => a feature that only appears at one blur level is probably a fluke, while a point that is extreme across several levels corresponds to a blob or structure of a definite size. That gives the keypoint its scale $\sigma$.
+
+=> **we have a set of scale invariant candidate keypoints: $\\{(x,y,\sigma)\\}**
+
+#### 2. Keypoint localization
+
+Candidate keypoints are refined and filtered to subpixel accuracy, to keep only the most robust keypoints:
+
+1. **interpolation of the actual extremum**: $(x,y,\sigma)$ of candidate keypoints are defined in pixel space, but the actual extremum may fall between pixels or between scales.
+2. **discarding low-contrast keypoints**: keypoints below a certain threshold are discarded because they are sensitive to noise
+3. **discarding edge keypoints**: if a keypoint lives along the edges of an object, it is unstable. Discard it.
+
+#### 3. Orientation assignment
+
+Each keypoint is assigned one or more orientations, so that its descriptor can be computed relative to them:
+
+1. **Gradient histogram**: gradient magnitudes and directions are computed in a neighborhood around the keypoint, at its scale $\sigma$, and accumulated into a histogram of 36 bins covering 360°. Each sample is weighted by its gradient magnitude and by a Gaussian window centered on the keypoint.
+2. **Dominant orientation**: the highest peak sets the keypoint's orientation $\theta$. Any other peak above 80% of the highest creates an extra keypoint with the same $(x, y, \sigma)$ and a different $\theta$.
+
+#### 4. Keypoint descriptor
+
+The descriptor encodes the local appearance of the keypoint, relative to its orientation:
+
+1. **Rotated patch**: a $16 \times 16$ patch around the keypoint is rotated by $\theta$ and sampled at scale $\sigma$, so the descriptor does not depend on the image's rotation.
+2. **Grid histograms**: the patch is split into a $4 \times 4$ grid. Each cell gets an 8-bin histogram of gradient orientations, giving $4 \times 4 \times 8 = 128$ values.
+3. **Normalization**: the 128 values are normalized to unit length, clipped at 0.2 to limit the influence of large gradients (such as strong lighting changes), and normalized again.
+
+#### Output
+
+The image is now described by a set of features $\{(x_i, y_i, \sigma_i, \theta_i, d_i)\}$, where $d_i \in \mathbb{R}^{128}$. Features from two images can be compared with the `SIFT -> feature matching -> RANSAC` pipeline described below.
 
 ---
 
