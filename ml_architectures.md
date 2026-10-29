@@ -62,7 +62,7 @@ The pipeline is: `SIFT -> descriptor maching -> RANSAC`
     - if $\frac{d_1}{d_2} \lt 0.75$ , the match is trustworthy:
       - descriptors $d_A^{(i)}$ $d_B^{(j_1)}$ matched,
       - so **$i$ and $j$ are matched keypoints**.
-  - output is a **set $\{(i, j)\}$ of all matched keypoints between $A$ and $B$**.
+  - output is a **set ${(i, j)}$ of all matched keypoints between $A$ and $B$**.
 
 ---
 
