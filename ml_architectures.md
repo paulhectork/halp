@@ -19,7 +19,7 @@ It takes as an input:
 - **$t$**, an inlier threshold
   - a point $x$ is an inlier if $\text{residual}(x, M(P_i)) < t$ ($\text{residual}$ measures how distant $x$ is from being consistent with model $M(P)$ )
 
-$S$ contains both *inliers* (points whose distribution can be explained by $M(P)$) and *outliers* (points that don't fit this model).
+$S$ contains both *inliers* (points whose distribution can be explained by $M(P)$ ) and *outliers* (points that don't fit this model).
 
 **The goal is to**:
 - **find the parameters $P^*$** that fit the largest number of points in $S$
