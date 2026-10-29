@@ -29,7 +29,7 @@ $S$ contains both *inliers* (points whose distribution can be explained by $M(P)
 
 The algorithm is run a fixed number of iterations.
 
-During the execution, $P^*$ and $C^*$ describe the best params and consensus set **so far**.
+During the execution, $P^\*$ and $C^\*$ describe the best params and consensus set **so far**.
 
 **At each iteration $i = 1, \dots, k$**:
 - **randomly sample** a minimal subset $s_i \subset S$ with $|s_i| = m$ ($s_i$ is of size $m$)
